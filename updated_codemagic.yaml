@@ -1,0 +1,24 @@
+
+workflows:
+  build-android:
+    name: Build Android APK
+    environment:
+      flutter: stable
+      vars:
+        BUILD_TYPE: release
+    scripts:
+      - name: Install dependencies
+        script: |
+          flutter pub get
+      - name: Build APK
+        script: |
+          flutter build apk --${BUILD_TYPE}
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
+        notify:
+          success: true
+          failure: true
